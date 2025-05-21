@@ -1,8 +1,10 @@
 import 'package:appone/users.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  String randomString;
+  HomeScreen({super.key, required this.randomString});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -27,8 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.pinkAccent,
-        title: const Text(
-          'Counter App',
+        title: Text(
+          'Counter App ${widget.randomString}',
           style: TextStyle(fontSize: 30, color: Colors.white),
         ),
         centerTitle: true,
