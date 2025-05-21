@@ -1,3 +1,4 @@
+import 'package:appone/users.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -56,6 +57,20 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () => Navigator.of(context).pushNamed('/users'),
+              child: const Text('Go to Users', style: TextStyle(fontSize: 20)),
+            ),
+            SizedBox(height: 20),
+            TextButton(
+              onPressed:
+                  () => Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => Users(count: count),
+                    ),
+                  ),
+              child: Text('Go to Users', style: TextStyle(fontSize: 20)),
+            ),
           ],
         ),
       ),
