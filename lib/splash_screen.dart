@@ -17,22 +17,25 @@ class _SplashScreenState extends State<SplashScreen> {
         MaterialPageRoute(
           builder: (context) => HomeScreen(randomString: 'via Flutter'),
         ),
-      ); // Prints after 1 second.
+      );
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final textColor = theme.textTheme.bodyLarge?.color ?? Colors.white;
+
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        decoration: const BoxDecoration(color: Color(0xFF363567)),
+        color: theme.scaffoldBackgroundColor,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
-            Center(
+          children: [
+            const Center(
               child: CircleAvatar(
                 backgroundColor: Colors.black,
                 radius: 120,
@@ -42,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
             Text(
               'Welcome',
               textAlign: TextAlign.center,
@@ -50,11 +53,11 @@ class _SplashScreenState extends State<SplashScreen> {
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Britanic Bold',
                 fontSize: 25,
-                color: Colors.white,
+                color: textColor,
               ),
             ),
-            SizedBox(height: 100),
-            CircularProgressIndicator(color: Colors.white),
+            const SizedBox(height: 100),
+            CircularProgressIndicator(color: textColor),
           ],
         ),
       ),
