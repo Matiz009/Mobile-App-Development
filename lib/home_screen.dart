@@ -2,6 +2,7 @@ import 'package:appone/themeProvider.dart';
 import 'package:appone/users.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // ignore: must_be_immutable
 class HomeScreen extends StatefulWidget {
@@ -17,16 +18,29 @@ class _HomeScreenState extends State<HomeScreen> {
   final _nameController = TextEditingController();
   final _ageController = TextEditingController();
 
-  void increment() {
-    setState(() {
-      count++;
-    });
+  void increment() => setState(() => count++);
+  void decrement() => setState(() => count--);
+
+  Future<void> viewSavedUsers() async {
+    final prefs = await SharedPreferences.getInstance();
+    final keys = prefs.getKeys();
+
+    if (keys.isEmpty) {
+      _showSnackBar('No users found.');
+    } else {
+      final users = keys.join(', ');
+      _showSnackBar('Saved users: $users');
+    }
   }
 
-  void decrement() {
-    setState(() {
-      count--;
-    });
+  void _showSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message, style: const TextStyle(color: Colors.white)),
+        backgroundColor: Colors.green,
+        duration: const Duration(seconds: 3),
+      ),
+    );
   }
 
   @override
@@ -116,6 +130,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Text(
                   'Go to Users',
                   style: textTheme.labelLarge?.copyWith(fontSize: 20),
+                ),
+              ),
+              const SizedBox(height: 20),
+              TextButton(
+                onPressed: viewSavedUsers,
+                child: Text(
+                  'View Users Saved via Shared Pref',
+                  style: textTheme.labelLarge?.copyWith(fontSize: 18),
                 ),
               ),
             ],

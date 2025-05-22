@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:appone/model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserDetailPage extends StatelessWidget {
   final UsersModel user;
@@ -38,10 +39,30 @@ class UserDetailPage extends StatelessWidget {
             _infoTile('Name', user.company.name),
             _infoTile('Catch Phrase', user.company.catchPhrase),
             _infoTile('BS', user.company.bs),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () => _saveUser(context),
+              child: const Text('Save User'),
+            ),
+            const SizedBox(height: 16),
           ],
         ),
       ),
     );
+  }
+
+  Future<void> _saveUser(BuildContext context) async {
+    final prefs = await SharedPreferences.getInstance();
+    final success = await prefs.setString(user.name, user.name);
+
+    final message =
+        success
+            ? 'User "${user.name}" saved successfully!'
+            : 'Failed to save user "${user.name}"';
+
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message)));
   }
 
   Widget _infoTile(String title, String value) {
