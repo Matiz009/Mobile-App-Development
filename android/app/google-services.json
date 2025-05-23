@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "448999733971",
+    "project_id": "oneapp-229e5",
+    "storage_bucket": "oneapp-229e5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:448999733971:android:0abb64b092bb8fc4853226",
+        "android_client_info": {
+          "package_name": "com.example.appone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3OOnPOgWwVhGehJXPcKN7ND3a8sXNh8w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

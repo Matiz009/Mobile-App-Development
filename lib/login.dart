@@ -1,4 +1,3 @@
-import 'package:appone/login.dart';
 import 'package:appone/themeProvider.dart';
 import 'package:appone/users.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,32 +6,20 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // ignore: must_be_immutable
-class HomeScreen extends StatefulWidget {
-  HomeScreen({super.key});
+class Login extends StatefulWidget {
+  Login({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<Login> createState() => _LoginState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _LoginState extends State<Login> {
   int count = 0;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  Future<void> viewSavedUsers() async {
-    final prefs = await SharedPreferences.getInstance();
-    final keys = prefs.getKeys();
-
-    if (keys.isEmpty) {
-      _showSnackBar('No users found.');
-    } else {
-      final users = keys.join(', ');
-      _showSnackBar('Saved users: $users');
-    }
-  }
-
-  void createAccount(String email, String password) async {
-    var user = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+  void loginUser(String email, String password) async {
+    var user = await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: email,
       password: password,
     );
@@ -61,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor:
             theme.appBarTheme.backgroundColor ?? theme.primaryColor,
         title: Text(
-          'Signup',
+          'Login',
           style: textTheme.titleLarge?.copyWith(
             color: theme.appBarTheme.foregroundColor ?? Colors.white,
             fontSize: 24,
@@ -117,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     return;
                   }
 
-                  createAccount(email, password);
+                  loginUser(email, password);
                   emailController.clear();
                   passwordController.clear();
                   Navigator.push(
@@ -128,31 +115,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 },
                 child: Text(
-                  'Create Account',
+                  'Login',
                   style: textTheme.labelLarge?.copyWith(fontSize: 18),
                 ),
               ),
               const SizedBox(height: 20),
-              TextButton(
-                onPressed: viewSavedUsers,
-                child: Text(
-                  'View Users Saved via Shared Pref',
-                  style: textTheme.labelLarge?.copyWith(fontSize: 18),
-                ),
-              ),
-              const SizedBox(height: 20),
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Login()),
-                  );
-                },
-                child: Text(
-                  'Already have an account? Login',
-                  style: textTheme.labelLarge?.copyWith(fontSize: 18),
-                ),
-              ),
             ],
           ),
         ),

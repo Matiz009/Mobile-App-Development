@@ -5,8 +5,9 @@ import 'dart:convert';
 import 'model.dart';
 
 class Users extends StatefulWidget {
-  final int count;
-  const Users({super.key, required this.count});
+  final dynamic email;
+
+  const Users({super.key, required this.email});
 
   @override
   State<Users> createState() => _UsersState();
@@ -43,7 +44,7 @@ class _UsersState extends State<Users> {
         backgroundColor:
             theme.appBarTheme.backgroundColor ?? theme.primaryColor,
         title: Text(
-          'Count: ${widget.count}',
+          'Email: ${widget.email}',
           style: TextStyle(
             fontSize: 30,
             color: theme.appBarTheme.foregroundColor ?? Colors.white,
