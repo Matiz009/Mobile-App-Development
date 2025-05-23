@@ -19,6 +19,7 @@ final darkTheme = ThemeData(
   useMaterial3: true,
 );
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
     ChangeNotifierProvider(
