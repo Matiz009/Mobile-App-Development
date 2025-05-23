@@ -1,3 +1,5 @@
+import 'package:appone/todo_model.dart';
+import 'package:appone/todo_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:appone/model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -45,6 +47,15 @@ class UserDetailPage extends StatelessWidget {
               child: const Text('Save User'),
             ),
             const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const TodoScreen()),
+                );
+              },
+              child: const Text('Todo App'),
+            ),
           ],
         ),
       ),
